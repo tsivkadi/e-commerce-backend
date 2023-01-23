@@ -37,8 +37,11 @@ const loginUser = async (req, res) => {
     const jwt_token = jwt.sign(payload, 'secret-jwt-key');
     return res
     .cookie("access_token", jwt_token, {
+      sameSite : "none",
+      secure: true,
+      domain: "https://furniture-shop.onrender.com",
       httpOnly: true,
-      expires: new Date(Date.now() + 1000*600)
+      expires: new Date(Date.now() + 1000*6000)
     })
     .status(200)
     .json(jwt_token)
